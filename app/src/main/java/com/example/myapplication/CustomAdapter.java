@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-    ArrayList<Mucsic> mMucsics;
+    private ArrayList<Mucsic> mMucsics;
+    private OnclickListener1 onclick;
 
-    public CustomAdapter(ArrayList<Mucsic> mMucsics) {
+    public CustomAdapter(ArrayList<Mucsic> mMucsics, OnclickListener1 onclick) {
         this.mMucsics = mMucsics;
+        this.onclick = onclick;
     }
 
     @NonNull
@@ -32,17 +36,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        Mucsic musicClick;
         TextView tenbh,tencs,thoiluong;
+        ImageButton btnplay;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tenbh = itemView.findViewById(R.id.tv_tenbh);
             tencs = itemView.findViewById(R.id.tv_tencs);
             thoiluong = itemView.findViewById(R.id.tv_thoiluong);
+            btnplay = itemView.findViewById(R.id.btn_play);
+            itemView.setOnClickListener(view->{
+
+            });
+            btnplay.setOnClickListener(view->{
+                onclick.clickbutton(musicClick);
+            });
+
         }
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Mucsic music1 = mMucsics.get(position);
+        holder.musicClick = music1;
         holder.tenbh.setText(music1.getTenbh());
         holder.tencs.setText(music1.getTencs());
         holder.thoiluong.setText(music1.getThoiluong());
