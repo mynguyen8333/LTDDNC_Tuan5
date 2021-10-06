@@ -2,12 +2,7 @@ package com.example.myapplication;
 
 public class Mucsic {
     private String tenbh,tencs,thoiluong;
-
-    public Mucsic(String tenbh, String tencs, String thoiluong) {
-        this.tenbh = tenbh;
-        this.tencs = tencs;
-        this.thoiluong = thoiluong;
-    }
+    private int anh;
 
     public String getTenbh() {
         return tenbh;
@@ -31,5 +26,20 @@ public class Mucsic {
 
     public void setThoiluong(String thoiluong) {
         this.thoiluong = thoiluong;
+    }
+
+    public int getAnh() {
+        return anh;
+    }
+
+    public void setAnh(int anh) {
+        this.anh = anh;
+    }
+
+    public Mucsic(String tenbh, String tencs, String thoiluong, int anh) {
+        this.tenbh = tenbh;
+        this.tencs = tencs;
+        this.thoiluong = thoiluong;
+        this.anh = anh;
     }
 }

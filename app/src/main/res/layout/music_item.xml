@@ -11,7 +11,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/background_item"
+        android:background="@drawable/background_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
@@ -35,13 +35,13 @@
         android:id="@+id/tv_thoiluong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="84dp"
         android:text="TextView"
         android:textColor="#80FBFBFB"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.459" />
+        app:layout_constraintVertical_bias="0.508" />
 
     <ImageButton
         android:id="@+id/btn_play"
@@ -50,10 +50,9 @@
         android:background="#2A144D"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.421"
         app:srcCompat="@drawable/nutplay"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -61,12 +60,24 @@
         android:id="@+id/tv_tenbh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:text="TextView"
         android:textColor="#FDFDFD"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_play"
-        app:layout_constraintStart_toEndOf="@+id/btn_play"
-        app:layout_constraintTop_toTopOf="@+id/btn_play"
+        app:layout_constraintBottom_toBottomOf="@+id/img_casi"
+        app:layout_constraintStart_toEndOf="@+id/img_casi"
+        app:layout_constraintTop_toTopOf="@+id/img_casi"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/img_casi"
+        android:layout_width="51dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="12dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+
+        app:srcCompat="@drawable/ed" />
 </androidx.constraintlayout.widget.ConstraintLayout>
