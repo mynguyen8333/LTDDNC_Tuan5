@@ -49,7 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             btnplay = itemView.findViewById(R.id.btn_play);
             img_anh = itemView.findViewById(R.id.img_casi);
             itemView.setOnClickListener(view->{
-
+                onclick.clickitem(musicClick,img_anh);
             });
             btnplay.setOnClickListener(view->{
                 onclick.clickbutton(musicClick);

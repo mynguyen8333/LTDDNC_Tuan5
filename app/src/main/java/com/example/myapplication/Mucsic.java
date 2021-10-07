@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class Mucsic {
+import java.io.Serializable;
+
+public class Mucsic implements Serializable {
     private String tenbh,tencs,thoiluong;
     private int anh;
 

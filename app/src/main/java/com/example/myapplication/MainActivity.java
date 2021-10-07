@@ -1,10 +1,16 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,8 +43,19 @@ public class MainActivity extends AppCompatActivity implements OnclickListener1{
         rsv_music.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
     }
 
+
     @Override
-    public void clickitem(Mucsic m) {
+    public void clickitem(Mucsic m, ImageView img) {
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(fade);
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        intent.putExtra("music",m);
+        ActivityOptionsCompat options =  ActivityOptionsCompat.makeSceneTransitionAnimation(
+                MainActivity.this, img,
+                ViewCompat.getTransitionName(img));
+        startActivity(intent,options.toBundle());
 
     }
 
