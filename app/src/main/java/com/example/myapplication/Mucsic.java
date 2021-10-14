@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Mucsic implements Serializable {
     private String tenbh,tencs,thoiluong;
     private int anh;
+    private int resource;
 
     public String getTenbh() {
         return tenbh;
@@ -38,10 +39,19 @@ public class Mucsic implements Serializable {
         this.anh = anh;
     }
 
-    public Mucsic(String tenbh, String tencs, String thoiluong, int anh) {
+    public int getResource() {
+        return resource;
+    }
+
+    public void setResource(int resource) {
+        this.resource = resource;
+    }
+
+    public Mucsic(String tenbh, String tencs, String thoiluong, int anh, int resource) {
         this.tenbh = tenbh;
         this.tencs = tencs;
         this.thoiluong = thoiluong;
         this.anh = anh;
+        this.resource = resource;
     }
 }

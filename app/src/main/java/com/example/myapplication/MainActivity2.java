@@ -2,10 +2,15 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,14 +22,33 @@ public class MainActivity2 extends AppCompatActivity {
     ImageView img_casi;
     TextView tv_tencs,tv_thoiluong,tv_tenbh;
     Mucsic mucsic;
-    ImageButton btnplay;
+    ImageButton btnplay,btnstop;
     String tenbh;
     //chay nhac
-    MediaPlayer mp;
+    static MediaPlayer mp;
     int count = 1;
     int totalTime;
     TextView txtbd,txtkt;
     ProgressBar progressBar;
+
+//    private MyService myService;
+//    private boolean isServiceConnected;
+//    private ServiceConnection mServiceConnection = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder iBinder) {
+//            MyService.MyBinder myBinder = (MyService.MyBinder) iBinder;
+//            myService = myBinder.getMusicBoundService();
+//            myService.startMusic();
+//            isServiceConnected = true;
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//            isServiceConnected = false;
+//        }
+//    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,15 +58,19 @@ public class MainActivity2 extends AppCompatActivity {
         tv_tencs = findViewById(R.id.tv_tencs3);
         tv_thoiluong = findViewById(R.id.tv_ketthuc);
         btnplay = findViewById(R.id.btn_play2);
+        //btnstop = findViewById(R.id.btn_stp);
         //phat nhac
         txtbd = findViewById(R.id.tv_batdau);
         txtkt = findViewById(R.id.tv_ketthuc);
         progressBar = findViewById(R.id.progressBar2);
-        //totalTime =MediaPlayer.create(getBaseContext(),R.raw.shapeofyou).getDuration();
 
 
         Intent intent = getIntent();
         if(intent!=null){
+            //ham 1
+            if(mp != null){
+                mp.stop();
+            }
             mucsic = (Mucsic) intent.getSerializableExtra("music");
             img_casi.setImageResource(mucsic.getAnh());
             tv_tenbh.setText(mucsic.getTenbh());
@@ -52,44 +80,43 @@ public class MainActivity2 extends AppCompatActivity {
 
             tenbh = mucsic.getTenbh();
 
-            if(tenbh.equalsIgnoreCase("Dusk Till Dawn")){
-                totalTime =MediaPlayer.create(getBaseContext(),R.raw.dusktilldawn).getDuration();
-            }if(tenbh.equalsIgnoreCase("Hello")){
-                totalTime =MediaPlayer.create(getBaseContext(),R.raw.hellodd).getDuration();
-            }if(tenbh.equalsIgnoreCase("See You Again")){
-                totalTime =MediaPlayer.create(getBaseContext(),R.raw.seeyouagain).getDuration();
-            }if(tenbh.equalsIgnoreCase("Shape of You")){
-                totalTime =MediaPlayer.create(getBaseContext(),R.raw.shapeofyou).getDuration();
-            }if(tenbh.equalsIgnoreCase("Waiting For Love")){
-                totalTime =MediaPlayer.create(getBaseContext(),R.raw.watingforlove).getDuration();
-            }
+            totalTime = MediaPlayer.create(getBaseContext(),mucsic.getResource()).getDuration();
+            //ham 2
+            mp = MediaPlayer.create(getApplicationContext(),mucsic.getResource());
+            //Toast.makeText(MainActivity2.this,"da co nhac",Toast.LENGTH_SHORT).show();
         }
 
-        btnplay.setOnClickListener(view->{
-            if(count++ %2 ==0) mp.stop();
-            else{
-                //mp = MediaPlayer.create(getBaseContext(), R.raw.shapeofyou);
-                if(tenbh.equalsIgnoreCase("Dusk Till Dawn")){
-                    mp = MediaPlayer.create(getBaseContext(), R.raw.dusktilldawn);
-                }if(tenbh.equalsIgnoreCase("Hello")){
-                    mp = MediaPlayer.create(getBaseContext(), R.raw.hellodd);
-                }if(tenbh.equalsIgnoreCase("See You Again")){
-                    mp = MediaPlayer.create(getBaseContext(), R.raw.seeyouagain);
-                }if(tenbh.equalsIgnoreCase("Shape of You")){
-                    mp = MediaPlayer.create(getBaseContext(), R.raw.shapeofyou);
-                }if(tenbh.equalsIgnoreCase("Waiting For Love")){
-                    mp = MediaPlayer.create(getBaseContext(), R.raw.watingforlove);
-                }
-                mp.setLooping(false);
+
+
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {//ham 3
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp = MediaPlayer.create(getApplicationContext(),mucsic.getResource());
                 mp.start();
-                if(mp.isPlaying()) {
+                Toast.makeText(MainActivity2.this,"chay di nhac",Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mp.isPlaying() && mp!=null) {
+                    mp.pause();//pausse laf dung lai khidang chay, stop la kill bai nhac luon hay sao ay
+                    btnplay.setImageResource(R.drawable.ic_pause);
+                    Toast.makeText(MainActivity2.this,"Pause",Toast.LENGTH_SHORT).show();
+                }
+                else if(mp.isPlaying()==false && mp!= null){
+                    mp.start();
+                    btnplay.setImageResource(R.drawable.nutplay);
+                    Toast.makeText(MainActivity2.this,"Play",Toast.LENGTH_SHORT).show();
                     txtbd.post(mUpdateTime);
                     progressBar.post(mUpdateProgress);
+
                 }
 
             }
         });
     }
+
 
     private Runnable mUpdateProgress = new Runnable() {
         public void run() {

@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity implements OnclickListener1{
         tv_tenbh2 = findViewById(R.id.tv_tenbh2);
         tv_tencs2 = findViewById(R.id.tv_tencs2);
 
-        mMusics.add(new Mucsic("Dusk Till Dawn","ZAYN ft. Sia","5:25",R.drawable.sia));
-        mMusics.add(new Mucsic("Hello","Adele ","4:37",R.drawable.hello));
-        mMusics.add(new Mucsic("See You Again","Wiz Khalifa ft. Charlie Puth","3:57",R.drawable.charlie));
-        mMusics.add(new Mucsic("Shape of You","Ed Sheeran","4:23",R.drawable.ed));
-        mMusics.add(new Mucsic("Waiting For Love","Avicii ","3:50",R.drawable.ativi));
+        mMusics.add(new Mucsic("Dusk Till Dawn","ZAYN ft. Sia","5:25",R.drawable.sia,R.raw.dusktilldawn));
+        mMusics.add(new Mucsic("Hello","Adele ","4:37",R.drawable.hello,R.raw.hellodd));
+        mMusics.add(new Mucsic("See You Again","Wiz Khalifa ft. Charlie Puth","3:57",R.drawable.charlie,R.raw.seeyouagain));
+        mMusics.add(new Mucsic("Shape of You","Ed Sheeran","4:23",R.drawable.ed,R.raw.shapeofyou));
+        mMusics.add(new Mucsic("Waiting For Love","Avicii ","3:50",R.drawable.ativi,R.raw.watingforlove));
 
 
         adt = new CustomAdapter(mMusics,this);
